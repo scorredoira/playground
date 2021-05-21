@@ -6,15 +6,19 @@
 }
 .toolbar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     background-color: #E0EBF5;
     padding: .5rem;
-    gap: 1rem;
+    gap: .5rem;
 }
 .toolbar .ui-title {
     margin: 0;
 }
-
+.ui-input {
+    max-width: 20rem;
+    display: none;
+}
 .body {
     display: flex;
     flex-direction: column;

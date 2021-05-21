@@ -1713,6 +1713,7 @@ interface String {
 }
 
 declare namespace strings {
+    export function sanitize(a: string): string
     export function equalFold(a: string, b: string): boolean
     export function isChar(value: string): boolean
     export function isDigit(value: string): boolean

@@ -42,13 +42,29 @@ function initRoutes() {
     router.add("/assets/*", {
         handler: (w: http.ResponseWriter, r: http.Request) => {
             let name = r.url.path.trimPrefix("/assets")
+            if (name.contains("..")) {
+                w.writeError(http.BAD_REQUEST)
+                return
+            }
             w.writeFile(name, fs)
         }
     })
 
     router.add("/code", {
         handler: (w: http.ResponseWriter, r: http.Request) => {
-            let code = `fmt.println("Hello World!")`
+            let code
+            let share = r.value("share")
+            if (share) {
+                let path = fmt.sprintf("/share/%v.ts", share)
+                if (path.contains("..")) {
+                    w.writeError(http.BAD_REQUEST)
+                    return
+                }
+                code = fs.readStringIfExists(path)
+            }
+            if (!code) {
+                code = `fmt.println("Hello World!")`
+            }
 
             w.writeJSON({
                 code: code,
@@ -88,6 +104,27 @@ function initRoutes() {
                 let result = fmt.sprintf("%v\n\n", error.message)
                 w.write(result)
             }
+        }
+    })
+
+
+    router.add("/share", {
+        handler: (w: http.ResponseWriter, r: http.Request) => {
+            let src = r.values().code
+            if (!src) {
+                return
+            }
+
+            let h = hash.newSHA256()
+            h.write(src)
+            let name = strings.sanitize(base64.encode(h.sum()))
+
+            let path = fmt.sprintf("/share/%v.ts", name)
+            fs.mkdir("/share")
+            fs.write(path, src)
+
+            let proto = r.tls ? "https" : "http"
+            w.write(fmt.sprintf("%s://%s?share=%s", proto, r.host, name))
         }
     })
 
