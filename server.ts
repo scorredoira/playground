@@ -62,6 +62,7 @@ function initRoutes() {
                 }
                 code = fs.readStringIfExists(path)
             }
+
             if (!code) {
                 code = `fmt.println("Hello World!")`
             }

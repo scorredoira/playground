@@ -6,18 +6,27 @@
 }
 .toolbar {
     display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
     align-items: center;
     background-color: #E0EBF5;
     padding: .5rem;
-    gap: .5rem;
 }
 .toolbar .ui-title {
     margin: 0;
+    white-space: nowrap;
+    margin-right: .5rem;
 }
-.ui-input {
+.toolbar .ui-button {
+    margin-right: .5rem;
+}
+.toolbar .ui-input {
     max-width: 20rem;
+    margin-right: .5rem;
     display: none;
+}
+.toolbar .ui-select {
+    width: unset;
+    min-width: 100px;
 }
 .body {
     display: flex;
