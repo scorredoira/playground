@@ -64,7 +64,7 @@ function initRoutes() {
             }
 
             if (!code) {
-                code = `fmt.println("Hello World!")`
+                code = `fmt.println("Hello, playground")`
             }
 
             w.writeJSON({

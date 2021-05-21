@@ -28,6 +28,9 @@
     width: unset;
     min-width: 100px;
 }
+.toolbar .right {
+    margin-left: auto;
+}
 .body {
     display: flex;
     flex-direction: column;
@@ -40,11 +43,12 @@
     padding: .3rem 0;
     width: 100%;
     overflow: hidden;
-    flex-basis: 50%;
-}  
+    flex-basis: 70%;
+    position: relative;
+}
 .consolePanel {
     display: flex;
-    flex-basis: 50%;
+    flex-basis: 30%;
     background: #292926;
     color: #fff;
     padding: 1rem;
@@ -53,4 +57,22 @@
     overflow-y: auto;
     white-space: pre-line;
     position: relative;
+}
+.aboutPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #FFD;
+    padding: 2rem;
+    line-height: 1.7rem;
+}
+.aboutPanel h1 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+.aboutPanel .content {
+    max-width: 600px;
+    white-space: pre-line;
 }
